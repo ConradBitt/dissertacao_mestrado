@@ -16,13 +16,66 @@ Alguns resultados são mostrados através do [Jupyter Notebook](https://jupyter.
 
 1. Crie um ambiente virtual com o pacote python [venv](https://docs.python.org/3.10/library/venv.html) ou [conda](https://conda.io/projects/conda/en/latest/user-guide/index.html). Ative o ambiente virtual e instale os pacotes com pip:
 
-         pip instalar -r requisitos.txt
+         pip install -r requirements.txt
         
 2. Para computação paralela, instale o MPI: [Início rápido: Instalando o Open MPI](https://docs.open-mpi.org/en/v5.0.x/installing-open-mpi/quickstart.html)
 
 
 ## Como usar
-Primeiro, na pasta “simulations_one_cell” ou “simulations_network”, execute “nrnivmodl” no terminal para compilar os arquivos NEURON. Isto só deve ser feito uma vez.
+Primeiro, na pasta “sim”, execute “nrnivmodl” no terminal para compilar os arquivos NEURON. Isto só deve ser feito uma vez.
 
-# Primeiro resultado
-![img](https://github.com/ConradBitt/hh_ring/blob/main/data/v0_batch0/v0_batch0_raster.png)
+# Simulações e Modificações
+
+## Simulação 
+As modificações nos parâmetros de simulação podem ser feitas através do arquivo [cfg.py](/sim/cfg.py). 
+
+## Network
+As modificações na rede podem ser feitas através do arquivo [netParams.py](/sim/netParams.py). 
+
+## Run
+A execução de uma simulação pode ser feita de duas maneiras:
+1. Executando o arquivo [init.py](/sim/init.py)
+3. Executando o arquivo [batch.py](/sim/batch.py)
+
+**Observação:** Ao executar [batch.py](/sim/batch.py) é necessario definir a quantidade de lotes de redes que serão simuladas. O arquivo [batch.py](/sim/batch.py) escolhe uma ou mais variáveis definidas no arquivo [cfg.py](/sim/cfg.py) para variar. Por exemplo, o arquivo [cfg.py](/sim/cfg.py) tem a variável `amp` que se refere a amplitude da corrente externa aplicada na rede, com [batch.py](/sim/batch.py) podemos executar uma lista de aplitudes adicionando `params[('IClamp0', 'amp')] = [0.08, 0.10, 0.12]` dentro da função `custom()` de [batch.py](/sim/batch.py).
+
+## Resultados
+Os resultados das simulações são salvos de acordo com o que foi definido em [cfg.py](/sim/cfg.py), por padrão salva na pasta [data](/data/)
+
+## PyCodes
+Na pasta [PyCodes](/pycodes/) estão os scripts utilizados para produzir figuras. Por padrão a imagem `.png` gerada tem o mesmo nome do arquivo que o código `.py` que a gerou.
+
+### Disparos Neuronais modelo HH e de Yamada
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/dinamica_HH_Yamamada.png" width="750">
+
+### Reobase e Chronaxia
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/reobase_chronaxia.png" width="400">
+
+### Exemplos de Rede
+#### Matriz de Adjacência 
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/matrizAdjacencia.png" width="750">
+
+#### Grafo da Rede
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/exemplo_rede.png" width="750">
+
+### Potencial de Membrana e Parâmetro de Ordem Local
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/plotLOP_Potencial.png" width="750">
+
+### Espaços de Parâmetro 
+#### Raio de Acoplamento pela Condutância Sináptica Excitatória
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/space_param_v1_batch1.png" width="450">
+
+#### Corrente Externa Aplicada pela Condutância Sináptica Excitatória
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/space_param_v2_batch1_2.png" width="450">
+
+#### Quantidade de Elementos Incoerentes: Corrente Externa Aplicada pela Condutância Sináptica Excitatória 
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/space_param_v2_batch1_counts.png" width="450">
+
+
+
+
+
+# Contribuidores do repositório
+* [Conrado F. Bittencourt](https://github.com/ConradBitt/)
+
+
