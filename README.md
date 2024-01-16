@@ -61,6 +61,9 @@ Na pasta [PyCodes](/pycodes/) estão os scripts utilizados para produzir figuras
 ### Potencial de Membrana e Parâmetro de Ordem Local
 <img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/plotLOP_Potencial.png" width="750">
 
+### Dinâmica da Rede
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/figures/v2_batch1_9_27_data_regiao_III_RSeChimera.png" width="750">
+
 ### Espaços de Parâmetro 
 #### Raio de Acoplamento pela Condutância Sináptica Excitatória
 <img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/space_param_v1_batch1.png" width="450">
