@@ -14,7 +14,7 @@ Alguns resultados são mostrados através do [Jupyter Notebook](https://jupyter.
 
 ### Instalação
 
-1. Crie um ambiente virtual com o pacote python [venv](https://docs.python.org/3.10/library/venv.html) ou [conda](https://conda.io/projects/conda/en/ mais recente/guia do usuário/index.html). Ative o ambiente virtual e instale os pacotes com pip:
+1. Crie um ambiente virtual com o pacote python [venv](https://docs.python.org/3.10/library/venv.html) ou [conda](https://conda.io/projects/conda/en/latest/user-guide/index.html). Ative o ambiente virtual e instale os pacotes com pip:
 
          pip instalar -r requisitos.txt
         
