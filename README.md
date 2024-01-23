@@ -1,4 +1,6 @@
 # Repositorio: Dissertação de Mestrado
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10557254.svg)](https://doi.org/10.5281/zenodo.10557254)
+
 O objetivo é disponibilizar resultados, arquivos e algorítmos utilizados na dissertação de mestrado.
 
 ## Começando
