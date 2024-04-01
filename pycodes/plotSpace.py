@@ -11,6 +11,27 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 cores = list(mcolors.TABLEAU_COLORS.keys())
 cores = [cor.split(':')[-1] for cor in cores]
 
+# Definição do mapa de cores "gnuplot"
+gnuplot = plt.cm.get_cmap('gnuplot')
+
+# Geração de cores para o mapa de cores personalizado
+num_colors_fr = 100
+num_colors_cv = 256
+newcolors_fr = gnuplot(np.linspace(0,5.5, 128))
+newcolors_CV = gnuplot(np.linspace(0,3.5, num_colors_cv))
+
+# Pintando valores acima de 100 de branco
+threshold_fr = 40
+threshold_cv = 95
+white = np.array([1, 1, 1, 1])
+newcolors_fr[int(threshold_fr):, :] = white
+newcolors_CV[int(threshold_cv):, :] = white
+
+# Criando o mapa de cores personalizado
+newcmp_fr = ListedColormap(newcolors_fr)
+newcmp_CV = ListedColormap(newcolors_CV)
+
+
 def plot_params():
     plt.rc('text', usetex=True)
     plt.rc('font', size=13)
@@ -26,11 +47,13 @@ def plot_params():
 plot_params()
 
 
-
-v = 1
-file = f'space_param_v{v}_batch1'
+# v = 3
+# file = f'space_param_v{v}_batch1'
 resol = 32
-with open(f'../results_spaceparams/{file}.pkl', 'rb') as f:
+# with open(f'../results_spaceparams/{file}.pkl', 'rb') as f:
+#     data_space_param = pickle.load(f)
+
+with open('../results/space_param_v1_batch1_copy.pkl', 'rb') as f:
     data_space_param = pickle.load(f)
 
 # cellNumber = data_space_param['infosNetWork']['cellNumber']
@@ -71,27 +94,33 @@ tg, ig = np.meshgrid(axis_neighbours[1:]/256, axis_gex[1:])
 
 # ax[0][0].set_title('$\overline{GOP(t)}$')
 ax[0][0].set_title('(A)', loc='left',pad=10)
-hm00 = ax[0][0].pcolor(ig, tg, mean_GOP_arr, cmap='gnuplot')
+hm00 = ax[0][0].pcolor(ig, tg, mean_GOP_arr, cmap='gnuplot', vmin=0., vmax=1)
 cbar00 = fig.colorbar(hm00, ax=ax[0][0])#, cax=cax1, format=formater)
-cbar00.set_label(r'$\overline{GOP}$')
+cbar00.ax.set_title(r'$\langle GOP \rangle$',pad=8)
 
 # ax[0][1].set_title('$\overline{\overline{LOP}(t)}$')
 ax[0][1].set_title('(B)', loc='left',pad=10)
-hm01 = ax[0][1].pcolor(ig, tg, mean_LOP_arr, cmap='gnuplot')
+hm01 = ax[0][1].pcolor(ig, tg, mean_LOP_arr, cmap='gnuplot', vmin=0.85, vmax=1)
 cbar01 = fig.colorbar(hm01, ax=ax[0][1])#, cax=cax1, format=formater)
-cbar01.set_label(r'$\overline{LOP(t)}$')
+cbar01.ax.set_title(r'$\langle LOP \rangle$',pad=8)
 
 # ax[1][0].set_title('$\overline{Fr}$')
 ax[1][0].set_title('(C)', loc='left',pad=10)
-hm03 = ax[1][0].pcolor(ig, tg, mean_freq_arr, cmap='gnuplot')
+# colocar grafico de cores não linear
+hm03 = ax[1][0].pcolor(ig, tg, mean_freq_arr, cmap=newcmp_fr, vmin=5, vmax=55)
 cbar03 = fig.colorbar(hm03, ax=ax[1][0])#, cax=cax1, format=formater)
-cbar03.set_label(r'Fr (Hz)')
+cbar03.ax.set_title(r'Fr (Hz)',pad=8)
+cbar03.ax.set_yticks(np.arange(5,60,5))
+labelscbar03 = [f'{i}' for i in np.arange(5,60,5)]
+labelscbar03[-1] = r'$>55$'
+cbar03.ax.set_yticklabels(labelscbar03)
 
 # ax[1][1].set_title('$\overline{CV}$')
 ax[1][1].set_title('(D)',loc='left',pad=10)
-hm02 = ax[1][1].pcolor(ig, tg, mean_cv_arr, cmap='gnuplot')
+hm02 = ax[1][1].pcolor(ig, tg, mean_cv_arr, cmap=newcmp_CV, vmin=0, vmax=2.5)
 cbar02 = fig.colorbar(hm02, ax=ax[1][1])#, cax=cax1, format=formater)
-cbar02.set_label(r'$CV$')
+cbar02.ax.set_title(r'$CV$',pad=8)
+cbar02.ax.set_yticks(np.arange(0,3.,0.5))
 
 step_y = plticker.MultipleLocator(base=0.05) # this locator puts ticks at regular intervals
 step_x = plticker.MultipleLocator(base=0.5e-4)
@@ -110,5 +139,6 @@ ax[1][0].set_ylabel('$r$')
 ax[1][0].set_xlabel('$g_{ex}$ ($mS/cm²$)')
 ax[1][1].set_xlabel('$g_{ex}$ ($mS/cm²$)')
 
-plt.savefig(f'{file}.png', dpi=600, bbox_inches='tight', format='png')
+# plt.savefig(f'{file}.png', dpi=600, bbox_inches='tight', format='png')
+plt.savefig(f'teste_espaco.png', dpi=600, bbox_inches='tight', format='png')
 plt.show()
