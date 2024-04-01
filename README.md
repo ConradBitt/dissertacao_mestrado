@@ -48,7 +48,7 @@ Os resultados das simulações são salvos de acordo com o que foi definido em [
 Na pasta [PyCodes](/pycodes/) estão os scripts utilizados para produzir figuras. Por padrão a imagem `.png` gerada tem o mesmo nome do arquivo que o código `.py` que a gerou.
 
 ### Disparos Neuronais modelo HH e de Yamada
-<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/dinamica_HH_Yamamada.png" width="750">
+<img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/dinamica_HH_Yamada.png" width="750">
 
 ### Reobase e Chronaxia
 <img src="https://github.com/ConradBitt/dissertacao_mestrado/blob/main/pycodes/reobase_chronaxia.png" width="400">
